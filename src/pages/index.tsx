@@ -11,7 +11,7 @@ const Home: NextPage = () => {
       </Head>
 
       <div className="flex">
-        <p className="m-auto text-3xl font-bold underline">Hello world!</p>
+        <p className="m-auto text-3xl font-bold underline">Hello aiko!</p>
       </div>
     </div>
   )
