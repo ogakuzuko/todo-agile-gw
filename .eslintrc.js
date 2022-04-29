@@ -44,8 +44,11 @@ module.exports = {
     'linebreak-style': ['error', 'unix'],
     'comma-dangle': 'off',
     'no-undef': 'warn',
-    // "no-console": ["warn", { allow: ["warn", "info", "error"] }],
-    'no-restricted-syntax': ['error', { selector: 'TSEnumDeclaration', message: "Don't declare enums" }],
+    'no-console': ['warn', { allow: ['warn', 'info', 'error'] }],
+    'no-restricted-syntax': [
+      'error',
+      { selector: 'TSEnumDeclaration', message: "Don't declare enums" },
+    ],
     'prefer-arrow-callback': 'error',
     'prefer-const': 'error',
     'func-style': ['error', 'expression'],
@@ -73,7 +76,10 @@ module.exports = {
     '@typescript-eslint/no-var-requires': 'off',
     '@typescript-eslint/explicit-module-boundary-types': 'off',
     '@typescript-eslint/consistent-type-imports': ['error', { prefer: 'type-imports' }],
-    '@typescript-eslint/no-unused-vars': ['error', { varsIgnorePattern: '^_', argsIgnorePattern: '^_' }],
+    '@typescript-eslint/no-unused-vars': [
+      'error',
+      { varsIgnorePattern: '^_', argsIgnorePattern: '^_' },
+    ],
     'jsx-a11y/no-autofocus': 'off',
     'jsx-a11y/anchor-is-valid': [
       'error',
