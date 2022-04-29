@@ -1,2 +1,1 @@
-export { TopContainer } from './TopContainer'
-export { TopPresenter } from './TopPresenter'
+export { TopContainer as TopPage } from './TopContainer'

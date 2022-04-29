@@ -1,4 +1,4 @@
-import { TopContainer } from '@/components/page/Top'
+import { TopPage } from '@/components/page/Top'
 
 // eslint-disable-next-line import/no-default-export
-export default TopContainer
+export default TopPage
