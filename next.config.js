@@ -1,9 +1,10 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: true,
+  reactStrictMode: false,
   i18n: { locales: ['ja'], defaultLocale: 'ja' },
   typescript: { ignoreDevErrors: true },
   eslint: { ignoreDuringBuilds: true },
+  pageExtensions: ['page.tsx', 'page.ts'],
   poweredByHeader: false,
 }
 
