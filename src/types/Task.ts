@@ -2,7 +2,7 @@ import type { Dayjs } from 'dayjs'
 
 export type Status =
   | 'BEFORE_START'
-  | 'START'
+  | 'STARTED'
   | 'DEV_FINISHED'
   | 'VER_DEPLOYED'
   | 'TEST_OK'
