@@ -1,5 +1,6 @@
 import '@/styles/globals.css'
 import '@/libs/firebase/init' // FirebaseApp 初期化
+import '@/libs/dayjs/init'
 
 import type { AppProps } from 'next/app'
 
