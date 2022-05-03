@@ -20,7 +20,7 @@ const INITIAL_AUTH_STATE: AuthState = {
 /**
  * ユーザーのサインイン状態を取得するためのカスタムフック
  */
-export const useAuthState = (): AuthState => {
+export const useAuth = (): AuthState => {
   const [authState, setAuthState] = useState<AuthState>(INITIAL_AUTH_STATE)
 
   useEffect(() => {
@@ -33,7 +33,6 @@ export const useAuthState = (): AuthState => {
           userId: user.uid,
           userName: user.displayName || undefined,
         })
-        console.log('useAuthState.tsx:', user)
       } else {
         setAuthState({ ...INITIAL_AUTH_STATE, isLoading: false })
       }

@@ -2,11 +2,11 @@ import { signOut } from 'firebase/auth'
 import { useRouter } from 'next/router'
 import type { FC } from 'react'
 
-import { useAuthState } from '@/hooks/auth'
+import { useAuth } from '@/hooks/auth'
 import { auth } from '@/libs/firebase'
 
 export const SignInOrOutButton: FC = () => {
-  const { isSignedIn } = useAuthState()
+  const { isSignedIn } = useAuth()
   const router = useRouter()
 
   if (isSignedIn) {
