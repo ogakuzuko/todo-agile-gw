@@ -12,7 +12,7 @@ export type Status =
 export type TaskType = 'FEATURE' | 'CHORE' | 'BUG'
 
 export type Task = {
-  id: number
+  id: string
   title: string
   status: Status
   userId: string
