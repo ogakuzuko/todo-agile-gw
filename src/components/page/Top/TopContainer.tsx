@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router'
 import type { FC } from 'react'
 
+import { Layout } from '@/components/ui/Layout'
 import { useAuth } from '@/hooks/auth'
 
 import { TopPresenter } from './TopPresenter'
@@ -14,5 +15,9 @@ export const TopContainer: FC = () => {
     router.push('/auth/signin')
   }
 
-  return <TopPresenter />
+  return (
+    <Layout>
+      <TopPresenter />
+    </Layout>
+  )
 }

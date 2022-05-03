@@ -6,7 +6,7 @@ export const Profile: FC = () => {
   const { userId, userName } = useAuth()
 
   return (
-    <div className="text-center">
+    <div className="w-96 font-semibold bg-orange-300">
       <h1>Profile</h1>
       <p>{userId ? userId : 'ユーザーIDが存在しません'}</p>
       <p>{userName ? userName : 'ユーザー名が存在しません'}</p>

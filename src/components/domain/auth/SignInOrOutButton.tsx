@@ -11,9 +11,17 @@ export const SignInOrOutButton: FC = () => {
 
   if (isSignedIn) {
     // eslint-disable-next-line react/jsx-handler-names
-    return <button onClick={() => signOut(auth)}>SignOut</button>
+    return (
+      <button className="w-20 bg-teal-300" onClick={() => signOut(auth)}>
+        SignOut
+      </button>
+    )
   } else {
     // eslint-disable-next-line react/jsx-handler-names
-    return <button onClick={() => router.push('/auth/signin')}>SignIn</button>
+    return (
+      <button className="w-20 bg-teal-300" onClick={() => router.push('/auth/signin')}>
+        SignIn
+      </button>
+    )
   }
 }
