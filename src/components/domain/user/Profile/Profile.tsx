@@ -1,9 +1,10 @@
 import type { FC } from 'react'
 
-import { useAuthState } from '@/hooks/auth/useAuthState'
+import { useAuthState } from '@/hooks/auth'
 
 export const Profile: FC = () => {
   const { userId, userName } = useAuthState()
+
   return (
     <div className="text-center">
       <h1>Profile</h1>
