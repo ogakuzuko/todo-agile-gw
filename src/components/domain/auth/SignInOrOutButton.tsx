@@ -2,7 +2,7 @@ import { signOut } from 'firebase/auth'
 import { useRouter } from 'next/router'
 import type { FC } from 'react'
 
-import { useAuthState } from '@/hooks/useAuthState'
+import { useAuthState } from '@/hooks/auth/useAuthState'
 import { auth } from '@/libs/firebase'
 
 export const SignInOrOutButton: FC = () => {

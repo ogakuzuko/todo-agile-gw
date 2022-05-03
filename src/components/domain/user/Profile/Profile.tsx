@@ -1,6 +1,6 @@
 import type { FC } from 'react'
 
-import { useAuthState } from '@/hooks/useAuthState'
+import { useAuthState } from '@/hooks/auth/useAuthState'
 
 export const Profile: FC = () => {
   const { userId, userName } = useAuthState()
