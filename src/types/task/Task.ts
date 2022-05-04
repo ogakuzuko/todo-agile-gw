@@ -17,6 +17,8 @@ export type Task = {
   status: Status
   userId: string
   type: TaskType
-  dueDate: Dayjs
-  point: number
+  dueDate?: Dayjs
+  point?: number
 }
+
+export type NewTask = Omit<Task, 'id' | 'status'>
