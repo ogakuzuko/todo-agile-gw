@@ -56,15 +56,15 @@ module.exports = {
     'react/prop-types': 'off',
     'react/react-in-jsx-scope': 'off',
     'react/display-name': 'off',
-    'react/jsx-handler-names': [
-      'error',
-      {
-        eventHandlerPrefix: 'handle',
-        eventHandlerPropPrefix: 'on',
-        checkLocalVariables: true,
-        checkInlineFunction: true,
-      },
-    ],
+    // 'react/jsx-handler-names': [
+    //   'error',
+    //   {
+    //     eventHandlerPrefix: 'handle',
+    //     eventHandlerPropPrefix: 'on',
+    //     checkLocalVariables: true,
+    //     checkInlineFunction: true,
+    //   },
+    // ],
     'react-hooks/rules-of-hooks': 'error',
     'react-hooks/exhaustive-deps': 'warn',
     'import/newline-after-import': 'error',
