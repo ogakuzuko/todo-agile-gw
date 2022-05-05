@@ -1,3 +1,4 @@
-@tailwind base;
+/* NOTE: MantineとTailwindを併用する際、@tailwind base; と Mantine側のリセットCSS(withNormalizeCSS)が競合してしまうみたいなのでtailwind側をオフにする */
+/* @tailwind base; */
 @tailwind components;
 @tailwind utilities;

@@ -2,10 +2,15 @@ import '@/styles/globals.css'
 import '@/libs/firebase/init' // FirebaseApp 初期化
 import '@/libs/dayjs/init'
 
+import { MantineProvider } from '@mantine/core'
 import type { AppProps } from 'next/app'
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
-  return <Component {...pageProps} />
+  return (
+    <MantineProvider withGlobalStyles withNormalizeCSS>
+      <Component {...pageProps} />
+    </MantineProvider>
+  )
 }
 
 // eslint-disable-next-line import/no-default-export
