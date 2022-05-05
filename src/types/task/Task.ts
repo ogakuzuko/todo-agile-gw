@@ -16,4 +16,4 @@ export type Task = {
   point?: number
 }
 
-export type NewTask = Omit<Task, 'id' | 'status'>
+export type NewTask = Omit<Task, 'id'>
