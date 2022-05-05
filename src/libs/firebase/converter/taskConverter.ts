@@ -76,5 +76,10 @@ const isValid = (data: unknown): data is Task => {
     return false
   }
 
+  // pointが存在する場合は、pointが数値であること
+  if (data.point && typeof data.point !== 'number') {
+    return false
+  }
+
   return true
 }
