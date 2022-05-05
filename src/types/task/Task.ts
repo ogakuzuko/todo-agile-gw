@@ -1,15 +1,10 @@
 import type { Dayjs } from 'dayjs'
 
-export type Status =
-  | 'BEFORE_START'
-  | 'STARTED'
-  | 'DEV_FINISHED'
-  | 'VER_DEPLOYED'
-  | 'TEST_OK'
-  | 'TEST_NG'
-  | 'RELEASED'
+import type { TASK_STATUS, TASK_TYPE } from '@/constants/task'
 
-export type TaskType = 'FEATURE' | 'CHORE' | 'BUG'
+export type Status = typeof TASK_STATUS[number]
+
+export type TaskType = typeof TASK_TYPE[number]
 
 export type Task = {
   id: string
