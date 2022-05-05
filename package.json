@@ -27,6 +27,7 @@
     "@mantine/hooks": "^4.2.2",
     "@mantine/next": "^4.2.2",
     "@mantine/notifications": "^4.2.2",
+    "@radix-ui/react-icons": "^1.1.0",
     "dayjs": "^1.11.1",
     "firebase": "^9.7.0",
     "next": "12.1.5",
