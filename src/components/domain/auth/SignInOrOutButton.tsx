@@ -6,8 +6,8 @@ import { useAuth } from '@/hooks/auth'
 import { auth } from '@/libs/firebase'
 
 export const SignInOrOutButton: FC = () => {
-  const { isSignedIn } = useAuth()
   const router = useRouter()
+  const { isSignedIn } = useAuth()
 
   if (isSignedIn) {
     // eslint-disable-next-line react/jsx-handler-names
