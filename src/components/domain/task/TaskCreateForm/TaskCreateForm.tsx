@@ -8,7 +8,7 @@ import { Button } from '@/components/ui/Button'
 import type { NewTask } from '@/types/task'
 
 export const TaskCreateForm = () => {
-  const { onSubmit, getInputProps } = useForm<NewTask>({
+  const { onSubmit, getInputProps, values } = useForm<NewTask>({
     initialValues: {
       title: '',
       status: 'BEFORE_START',
@@ -32,12 +32,17 @@ export const TaskCreateForm = () => {
           ]}
           {...getInputProps('type')}
         />
-        <DatePicker placeholder="" label="締切日" {...getInputProps('dueDate')} />
+        <DatePicker
+          label="締切日"
+          {...getInputProps('dueDate')}
+          disabled={values.type !== 'FEATURE'}
+        />
         <NumberInput
           defaultValue={0}
           placeholder="未推定"
           label="ストーリーポイント"
           {...getInputProps('point')}
+          disabled={values.type !== 'FEATURE'}
         />
         <Group position="right">
           <Button type="submit" variant="light" color="orange" mt="xs">
