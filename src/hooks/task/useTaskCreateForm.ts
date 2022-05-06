@@ -1,5 +1,5 @@
 import { useForm } from '@mantine/form'
-import { useCallback } from 'react'
+import { useCallback, useEffect } from 'react'
 
 import { createTaskUsecase } from '@/domain/usecase/task'
 import { useAuth } from '@/hooks/auth'
@@ -7,7 +7,7 @@ import type { NewTask } from '@/types/task'
 
 export const useTaskCreateForm = () => {
   const { userId } = useAuth()
-  const { onSubmit, getInputProps, values } = useForm<NewTask>({
+  const { onSubmit, getInputProps, setFieldValue, values } = useForm<NewTask>({
     initialValues: {
       title: '',
       status: 'BEFORE_START',
@@ -30,6 +30,14 @@ export const useTaskCreateForm = () => {
     },
     [userId],
   )
+
+  useEffect(() => {
+    // 課題のタイプがFEATURE以外で、dueDateとpointの値が設定されている場合、それらの値をリセットする
+    if (values.type !== 'FEATURE' && (values.dueDate || values.point)) {
+      setFieldValue('dueDate', undefined)
+      setFieldValue('point', undefined)
+    }
+  }, [values.type, values.dueDate, values.point, setFieldValue])
 
   return { onSubmit, getInputProps, values, handleSubmit }
 }

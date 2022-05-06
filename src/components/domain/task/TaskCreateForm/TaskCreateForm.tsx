@@ -31,6 +31,8 @@ export const TaskCreateForm = () => {
         />
         <NumberInput
           defaultValue={0}
+          min={0}
+          max={30}
           placeholder="未推定"
           label="ストーリーポイント"
           {...getInputProps('point')}
