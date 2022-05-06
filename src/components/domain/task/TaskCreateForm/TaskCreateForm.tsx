@@ -2,39 +2,17 @@ import { Box, Group, TextInput } from '@mantine/core'
 import { Select } from '@mantine/core'
 import { NumberInput } from '@mantine/core'
 import { DatePicker } from '@mantine/dates'
-import { useForm } from '@mantine/form'
 
 import { Button } from '@/components/ui/Button'
-import { createTaskUsecase } from '@/domain/usecase/task'
-import { useAuth } from '@/hooks/auth'
-import type { NewTask } from '@/types/task'
+import { useTaskCreateForm } from '@/hooks/task/useTaskCreateForm'
 
 export const TaskCreateForm = () => {
-  const { userId } = useAuth()
-  const { onSubmit, getInputProps, values } = useForm<NewTask>({
-    initialValues: {
-      title: '',
-      status: 'BEFORE_START',
-      userId: '',
-      type: 'FEATURE',
-      dueDate: undefined,
-      point: undefined,
-    },
-  })
-
-  const handleSubmit = async (values: NewTask) => {
-    try {
-      const taskData = { ...values, userId: userId ?? '' }
-      await createTaskUsecase(taskData)
-    } catch (err) {
-      console.error('タスクの登録に失敗しました', err)
-      // TODO: タスク登録に失敗した旨のエラートーストを出す
-    }
-  }
+  const { onSubmit, handleSubmit, getInputProps, values } = useTaskCreateForm()
 
   return (
     <Box mx="auto">
       <form onSubmit={onSubmit(handleSubmit)} className="space-y-3">
+        {/* TODO: 理想はTextInputやSelect一つ一つをForm用の汎用コンポーネントとして作成したい */}
         <TextInput required label="要約" {...getInputProps('title')} />
         <Select
           required
