@@ -1,4 +1,4 @@
-import { createUser } from '@/domain/entity/user'
+import { createUser } from '@/domain/entity/User'
 import { FirebaseUserClient } from '@/repositories/FirebaseUserClient'
 import type { User } from '@/types/user'
 

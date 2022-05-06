@@ -1,4 +1,4 @@
-import { createTask } from '@/domain/entity/task'
+import { createTask } from '@/domain/entity/Task'
 import { FirebaseTaskClient } from '@/repositories/FirebaseTaskClient'
 import type { NewTask } from '@/types/task'
 
