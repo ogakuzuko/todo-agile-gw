@@ -1,4 +1,4 @@
-import { addDoc, collection, doc, getDoc, getDocs, query, where } from 'firebase/firestore'
+import { addDoc, collection, doc, getDoc, getDocs, query, setDoc, where } from 'firebase/firestore'
 
 import { firestore } from '@/libs/firebase'
 import { taskConverter } from '@/libs/firebase/converter/taskConverter'
@@ -22,8 +22,9 @@ export const FirebaseTaskClient: TaskRepository = {
     const tasksCollectionRef = collection(firestore, 'tasks').withConverter(taskConverter)
     await addDoc(tasksCollectionRef, task)
   },
-  update: async (): Promise<void> => {
-    return
+  update: async (task: Task): Promise<void> => {
+    const taskDocRef = doc(firestore, 'tasks', task.id).withConverter(taskConverter)
+    await setDoc(taskDocRef, task)
   },
   delete: async (): Promise<void> => {
     return

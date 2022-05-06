@@ -81,7 +81,8 @@ export const useTaskUpdateForm = (taskId: string) => {
       setFieldValue('status', originalTask.status)
       setFieldValue('userId', originalTask.userId)
       setFieldValue('type', originalTask.type)
-      setFieldValue('dueDate', originalTask.dueDate)
+      // FIXME: ここのDate変換永遠の謎（抜け出せない迷路）
+      setFieldValue('dueDate', originalTask.dueDate?.toDate() as any)
       setFieldValue('point', originalTask.point)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps

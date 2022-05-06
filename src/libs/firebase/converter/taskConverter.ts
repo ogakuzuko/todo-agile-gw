@@ -47,6 +47,7 @@ export const taskConverter: FirestoreDataConverter<Task> = {
       type: task.type,
       dueDate: task.dueDate,
       point: task.point,
+      // FIXME: タスク追加は良いが、タスク更新の度にcreatedAtが更新されてしまうので修正したい
       createdAt: serverTimestamp(),
     }
   },
