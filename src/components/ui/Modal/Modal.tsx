@@ -15,7 +15,12 @@ export const Modal: FC<ModalProps> = ({ content, modalTitle, openButtonText }) =
 
   return (
     <>
-      <MantineModal opened={opened} onClose={() => setOpened(false)} title={modalTitle}>
+      <MantineModal
+        closeOnClickOutside={false}
+        opened={opened}
+        onClose={() => setOpened(false)}
+        title={modalTitle}
+      >
         {content}
       </MantineModal>
 
