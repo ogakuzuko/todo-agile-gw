@@ -4,7 +4,7 @@ import { NumberInput } from '@mantine/core'
 import { DatePicker } from '@mantine/dates'
 
 import { Button } from '@/components/ui/Button'
-import { useTaskCreateForm } from '@/hooks/task/useTaskCreateForm'
+import { useTaskCreateForm } from '@/hooks/task'
 
 export const TaskCreateForm = () => {
   const { onSubmit, handleSubmit, getInputProps, values } = useTaskCreateForm()
