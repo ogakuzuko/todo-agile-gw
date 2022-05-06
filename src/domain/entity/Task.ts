@@ -98,52 +98,92 @@ export const updateTask = (updatingTask: Task, originalTaskStatus: Status): Task
     throw new Error('課題の要約は30文字以内である必要があります')
   }
 
-  // 変更前のステータスが「開始前」である時、変更後のステータスが「開始」でなければエラー
-  if (originalTaskStatus === 'BEFORE_START' && updatingTask.status !== 'STARTED') {
-    console.error('課題のステータスが不正です（開始前 → 開始）')
-    throw new Error('課題のステータスが不正です（開始前 → 開始）')
+  // 変更前のステータス：「開始前」
+  // 変更後のステータス：「開始」、または「開始前」のままで変更しない
+  if (
+    originalTaskStatus === 'BEFORE_START' &&
+    !(updatingTask.status == 'STARTED' || updatingTask.status == 'BEFORE_START')
+  ) {
+    console.error('課題のステータスが不正です（開始前 → 開始（または変更しない））')
+    throw new Error('課題のステータスが不正です（開始前 → 開始（または変更しない））')
   }
 
-  // 変更前のステータスが「開始」である時、変更後のステータスが「開発終了」でなければエラー
-  if (originalTaskStatus === 'STARTED' && updatingTask.status !== 'DEV_FINISHED') {
-    console.error('課題のステータスが不正です（開始 → 開発終了）')
-    throw new Error('課題のステータスが不正です（開始 → 開発終了）')
+  // 変更前のステータス：「開始」
+  // 変更後のステータス：「開発終了」、または「開始」のままで変更しない
+  if (
+    originalTaskStatus === 'STARTED' &&
+    !(updatingTask.status === 'DEV_FINISHED' || updatingTask.status === 'STARTED')
+  ) {
+    console.error('課題のステータスが不正です（開始 → 開発終了（または変更しない））')
+    throw new Error('課題のステータスが不正です（開始 → 開発終了（または変更しない））')
   }
 
-  // 変更前のステータスが「開発終了」である時、変更後のステータスが「検証環境デプロイ」または「開始」でなければエラー
+  // 変更前のステータス：「開発終了」
+  // 変更後のステータス：「検証環境デプロイ」または「開始」、または「開発終了」のままで変更しない
   if (
     originalTaskStatus === 'DEV_FINISHED' &&
-    !(updatingTask.status === 'VER_DEPLOYED' || updatingTask.status === 'STARTED')
+    !(
+      updatingTask.status === 'VER_DEPLOYED' ||
+      updatingTask.status === 'STARTED' ||
+      updatingTask.status === 'DEV_FINISHED'
+    )
   ) {
-    console.error('課題のステータスが不正です（開発終了 → 検証環境デプロイ | 開始）')
-    throw new Error('課題のステータスが不正です（開発終了 → 検証環境デプロイ | 開始）')
+    console.error(
+      '課題のステータスが不正です（開発終了 → 検証環境デプロイ | 開始（または変更しない））',
+    )
+    throw new Error(
+      '課題のステータスが不正です（開発終了 → 検証環境デプロイ | 開始（または変更しない））',
+    )
   }
 
-  // 変更前のステータスが「検証環境デプロイ」である時、変更後のステータスが「テストOK」または「テストNG」でなければエラー
+  // 変更前のステータス：「検証環境デプロイ」
+  // 変更後のステータス：「テストOK」または「テストNG」、または「検証環境デプロイ」のままで変更しない
   if (
     originalTaskStatus === 'VER_DEPLOYED' &&
-    !(updatingTask.status === 'TEST_OK' || updatingTask.status === 'TEST_NG')
+    !(
+      updatingTask.status === 'TEST_OK' ||
+      updatingTask.status === 'TEST_NG' ||
+      updatingTask.status === 'VER_DEPLOYED'
+    )
   ) {
-    console.error('課題のステータスが不正です（検証環境デプロイ → テストOK | テストNG）')
-    throw new Error('課題のステータスが不正です（検証環境デプロイ → テストOK | テストNG）')
+    console.error(
+      '課題のステータスが不正です（検証環境デプロイ → テストOK | テストNG（または変更しない））',
+    )
+    throw new Error(
+      '課題のステータスが不正です（検証環境デプロイ → テストOK | テストNG（または変更しない））',
+    )
   }
 
-  // 変更前のステータスが「テストOK」である時、変更後のステータスが「リリース済み」でなければエラー
-  if (originalTaskStatus === 'TEST_OK' && updatingTask.status !== 'RELEASED') {
-    console.error('課題のステータスが不正です（テストOK → リリース済み）')
-    throw new Error('課題のステータスが不正です（テストOK → リリース済み）')
+  // 変更前のステータス：「テストOK」
+  // 変更後のステータス：「リリース済み」、または「テストOK」のままで変更しない
+  if (
+    originalTaskStatus === 'TEST_OK' &&
+    !(updatingTask.status === 'RELEASED' || updatingTask.status === 'TEST_OK')
+  ) {
+    console.error('課題のステータスが不正です（テストOK → リリース済み（または変更しない））')
+    throw new Error('課題のステータスが不正です（テストOK → リリース済み（または変更しない））')
   }
 
-  // 変更前のステータスが「テストNG」である時、変更後のステータスが「開始」または「検証環境デプロイ」でなければエラー
+  // 変更前のステータス：「テストNG」
+  // 変更後のステータス：「開始」または「検証環境デプロイ」、または「テストNG」のままで変更しない
   if (
     originalTaskStatus === 'TEST_NG' &&
-    !(updatingTask.status === 'STARTED' || updatingTask.status === 'VER_DEPLOYED')
+    !(
+      updatingTask.status === 'STARTED' ||
+      updatingTask.status === 'VER_DEPLOYED' ||
+      updatingTask.status === 'TEST_NG'
+    )
   ) {
-    console.error('課題のステータスが不正です（テストNG → 開始 | 検証環境デプロイ）')
-    throw new Error('課題のステータスが不正です（テストNG → 開始 | 検証環境デプロイ）')
+    console.error(
+      '課題のステータスが不正です（テストNG → 開始 | 検証環境デプロイ（または変更しない））',
+    )
+    throw new Error(
+      '課題のステータスが不正です（テストNG → 開始 | 検証環境デプロイ（または変更しない））',
+    )
   }
 
-  // 変更前のステータスが「リリース済み」である時、ステータス遷移不能（=変更後も「リリース済み」でなければエラー）
+  // 変更前のステータス：「リリース済み」
+  // 変更後のステータス：ステータス遷移不能なので「リリース済み」のみ
   if (originalTaskStatus === 'RELEASED' && updatingTask.status !== 'RELEASED') {
     console.error('課題のステータスが不正です（リリース済み → 遷移不能）')
     throw new Error('課題のステータスが不正です（リリース済み → 遷移不能）')
