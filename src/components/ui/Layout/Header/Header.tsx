@@ -1,6 +1,8 @@
 import { Burger, Header as MantineHeader, Text, useMantineTheme } from '@mantine/core'
 import type { FC } from 'react'
 
+import { TaskForm } from '@/components/domain/task/TaskForm'
+import { Modal } from '@/components/ui/Modal'
 import { useMediaQuery } from '@/hooks/mantine'
 
 type HeaderProps = {
@@ -24,7 +26,10 @@ export const Header: FC<HeaderProps> = ({ opened, handleBurgerClick }) => {
           mr="xl"
         />
 
-        <Text>Header</Text>
+        <div className="flex justify-between items-center w-full">
+          <Text>Header</Text>
+          <Modal content={<TaskForm />} openButtonText="Add Task" modalTitle="タスクの追加" />
+        </div>
       </div>
     </MantineHeader>
   )
