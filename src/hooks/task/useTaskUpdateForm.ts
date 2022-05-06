@@ -60,7 +60,11 @@ export const useTaskUpdateForm = (taskId: string) => {
           throw new Error('ユーザーIDが一致しないため更新できません')
         }
 
-        await updateTaskUsecase(updatingTask)
+        if (!originalTask?.status) {
+          throw new Error('ステータスが存在しないため更新できません')
+        }
+
+        await updateTaskUsecase(updatingTask, originalTask.status)
       } catch (err) {
         console.error('タスクの更新に失敗しました', err)
         // TODO: タスク登録に失敗した旨のエラートーストを出す
