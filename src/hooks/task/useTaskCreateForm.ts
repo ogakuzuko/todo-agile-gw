@@ -1,13 +1,36 @@
-import { useForm } from '@mantine/form'
+import { useForm, zodResolver } from '@mantine/form'
 import { useCallback, useEffect } from 'react'
+import { z } from 'zod'
 
 import { createTaskUsecase } from '@/domain/usecase/task'
 import { useAuth } from '@/hooks/auth'
 import type { NewTask } from '@/types/task'
 
+const schema = z.object({
+  title: z
+    .string({
+      required_error: '課題の要約は必須です',
+      invalid_type_error: '課題の要約は文字列である必要があります',
+    })
+    .min(1, { message: '課題の要約は1文字以上である必要があります' })
+    .max(30, { message: '課題の要約は30文字以内である必要があります' }),
+  status: z.literal('BEFORE_START'),
+  userId: z.string(),
+  type: z.string().regex(/^(FEATURE|CHORE|BUG)$/, {
+    message: "課題のタイプは'FEATURE'か'CHORE'か'BUG'である必要があります",
+  }),
+  point: z.optional(
+    z
+      .number()
+      .min(0, { message: '課題のポイントは0以上である必要があります' })
+      .max(20, { message: '課題のポイントは30以下である必要があります' }),
+  ),
+})
+
 export const useTaskCreateForm = () => {
   const { userId } = useAuth()
   const { onSubmit, getInputProps, setFieldValue, values } = useForm<NewTask>({
+    schema: zodResolver(schema),
     initialValues: {
       title: '',
       status: 'BEFORE_START',
