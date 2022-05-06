@@ -2,6 +2,7 @@ import { signOut } from 'firebase/auth'
 import { useRouter } from 'next/router'
 import type { FC } from 'react'
 
+import { Button } from '@/components/ui/Button'
 import { useAuth } from '@/hooks/auth'
 import { auth } from '@/libs/firebase'
 
@@ -12,16 +13,16 @@ export const SignInOrOutButton: FC = () => {
   if (isSignedIn) {
     // eslint-disable-next-line react/jsx-handler-names
     return (
-      <button className="w-20 bg-teal-300" onClick={() => signOut(auth)}>
+      <Button compact variant="subtle" color="red" onClick={() => signOut(auth)}>
         SignOut
-      </button>
+      </Button>
     )
   } else {
     // eslint-disable-next-line react/jsx-handler-names
     return (
-      <button className="w-20 bg-teal-300" onClick={() => router.push('/auth/signin')}>
+      <Button compact variant="subtle" color="orange" onClick={() => router.push('/auth/signin')}>
         SignIn
-      </button>
+      </Button>
     )
   }
 }

@@ -1,6 +1,8 @@
 import { Navbar as MantineNavbar } from '@mantine/core'
 import type { FC } from 'react'
 
+import { SignInOrOutButton } from '@/components/domain/auth'
+
 type NavbarProps = {
   opened: boolean
 }
@@ -13,6 +15,9 @@ export const Navbar: FC<NavbarProps> = ({ opened }) => {
       <MantineNavbar.Section p="md">HOGE</MantineNavbar.Section>
       <MantineNavbar.Section p="md">HOGE</MantineNavbar.Section>
       <MantineNavbar.Section p="md">HOGE</MantineNavbar.Section>
+      <MantineNavbar.Section p="md">
+        <SignInOrOutButton />
+      </MantineNavbar.Section>
     </MantineNavbar>
   )
 }
