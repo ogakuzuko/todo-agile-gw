@@ -13,7 +13,12 @@ export const TaskCreateForm = () => {
     <Box mx="auto">
       <form onSubmit={onSubmit(handleSubmit)} className="space-y-3">
         {/* TODO: 理想はTextInputやSelect一つ一つをForm用の汎用コンポーネントとして作成したい */}
-        <TextInput required label="要約" {...getInputProps('title')} />
+        <TextInput
+          required
+          label="要約"
+          placeholder="課題の要約を3文字以上で入力してください"
+          {...getInputProps('title')}
+        />
         <Select
           required
           label="課題のタイプ"
@@ -31,8 +36,6 @@ export const TaskCreateForm = () => {
         />
         <NumberInput
           defaultValue={0}
-          min={0}
-          max={30}
           placeholder="未推定"
           label="ストーリーポイント"
           {...getInputProps('point')}
