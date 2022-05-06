@@ -52,6 +52,7 @@ export const taskConverter: FirestoreDataConverter<Task> = {
   },
 }
 
+// Read(読み取り)用のドメインバリデーション
 const isValid = (data: unknown): data is Task => {
   // プロパティアクセスできない可能性を排除
   if (!isPropertyAccessible(data)) return false

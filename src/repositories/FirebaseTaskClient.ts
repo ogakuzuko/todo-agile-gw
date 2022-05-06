@@ -19,7 +19,7 @@ export const FirebaseTaskClient: TaskRepository = {
     return tasks
   },
   create: async (task: NewTask): Promise<void> => {
-    const tasksCollectionRef = collection(firestore, 'tasks')
+    const tasksCollectionRef = collection(firestore, 'tasks').withConverter(taskConverter)
     await addDoc(tasksCollectionRef, task)
   },
   update: async (): Promise<void> => {
