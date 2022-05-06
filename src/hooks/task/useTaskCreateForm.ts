@@ -12,7 +12,7 @@ const schema = z.object({
       required_error: '課題の要約は必須です',
       invalid_type_error: '課題の要約は文字列である必要があります',
     })
-    .min(1, { message: '課題の要約は1文字以上である必要があります' })
+    .min(3, { message: '課題の要約は3文字以上である必要があります' })
     .max(30, { message: '課題の要約は30文字以内である必要があります' }),
   status: z.literal('BEFORE_START'),
   userId: z.string(),
@@ -23,7 +23,7 @@ const schema = z.object({
     z
       .number()
       .min(0, { message: '課題のポイントは0以上である必要があります' })
-      .max(20, { message: '課題のポイントは30以下である必要があります' }),
+      .max(30, { message: '課題のポイントは30以下である必要があります' }),
   ),
 })
 
@@ -60,7 +60,9 @@ export const useTaskCreateForm = () => {
       setFieldValue('dueDate', undefined)
       setFieldValue('point', undefined)
     }
-  }, [values.type, values.dueDate, values.point, setFieldValue])
+    // NOTE: setFieldValueを依存配列に入れると無限再レンダリングが発生したので除外
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [values.type, values.dueDate, values.point])
 
   return { onSubmit, getInputProps, values, handleSubmit }
 }
