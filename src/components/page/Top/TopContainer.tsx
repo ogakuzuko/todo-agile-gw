@@ -17,16 +17,15 @@ export const TopContainer: FC = () => {
   // Firestoreへのユーザー登録処理
   useCreateUser()
 
-  console.log('useTasksデータ', { isTasksLoading, tasks, error })
-
   // 未ログインユーザーはログイン画面へ遷移
   if (!isUserLoading && !isSignedIn) {
     router.push('/auth/signin')
   }
 
-  return (
-    <Layout>
-      <TopPresenter />
-    </Layout>
-  )
+  if (!isTasksLoading && error) {
+    // TODO: タスクの取得に失敗した旨のエラートーストを表示
+    console.error(error)
+  }
+
+  return <Layout>{tasks && <TopPresenter tasks={tasks} />}</Layout>
 }

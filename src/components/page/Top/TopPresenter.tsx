@@ -1,11 +1,12 @@
 import type { FC } from 'react'
 
-import { Profile } from '@/components/domain/user/Profile'
+import { TaskList } from '@/components/domain/task/TaskList'
+import type { Task } from '@/types/task'
 
-export const TopPresenter: FC = () => {
-  return (
-    <div className="flex flex-col items-center">
-      <Profile />
-    </div>
-  )
+type TopPresenterProps = {
+  tasks: Task[]
+}
+
+export const TopPresenter: FC<TopPresenterProps> = ({ tasks }) => {
+  return <TaskList tasks={tasks} />
 }

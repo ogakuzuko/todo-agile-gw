@@ -24,7 +24,7 @@ export const Modal: FC<ModalProps> = ({ content, modalTitle, openButtonText }) =
         {content}
       </MantineModal>
 
-      <Button color="pink" variant="light" onClick={() => setOpened(true)}>
+      <Button compact color="pink" variant="light" onClick={() => setOpened(true)}>
         {openButtonText}
       </Button>
     </>
