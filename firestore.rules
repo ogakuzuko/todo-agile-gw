@@ -1,17 +1,26 @@
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
-    // 認証済みかどうか
-  	function isAuthenticated() {
+    // 何らかの認証が済んでいるかどうか（匿名認証やSNS認証など）
+  	function isAnyAuthenticated() {
       return request.auth != null;
     }
 
-    // ユーザーIDの検証も含めて認証済みかどうか
-  	function isMe(userId) {
-    	return isAuthenticated() && userId == request.auth.uid;
+    // ユーザーIDの検証も含めて認証済みかどうか（認可）
+    // 命名は isMe でも良さそう
+  	function isUserAuthenticated(userId) {
+    	return isAnyAuthenticated() && userId == request.auth.uid;
     }
 
-    function checkCreateTaskData(data) {
+    // NOTE: [重要] POST系のリクエストに対しては確りとバリデーションをかける（Firestoreのエミュレータを用いてテスト実行環境も整備できるとなお良い）
+    // 命名は checkCreateUserData も良さそう
+    function isValidCreateUserData(data) {
+      // nameが存在する場合は、文字列且つ30文字以内
+      // nameが存在しない場合は左辺のみでreturnされる。存在する場合は右辺のチェックが実行される
+      // nullの可能性がある項目(フィールド)には以下のようにルールを設定する
+    	return !('name' in data) || (data.name is string && data.name.size() <= 30);
+    }
+
     	// keyはTaskに存在しているもののみ
       // titleは100文字以内
       // typeはFEATURE/CHORE/BUGの3種類のみ（正規表現）
@@ -21,7 +30,8 @@ service cloud.firestore {
     }
 
   	match /users/{userId} {
-    	allow get: if isMe(userId);
+    	allow read: if isUserAuthenticated(userId);
+      allow create: if isUserAuthenticated(userId) && isValidCreateUserData(request.resource.data)
     }
 
 		// match /tasks/{taskId} {
