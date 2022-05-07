@@ -2,14 +2,14 @@ rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
     // 何らかの認証が済んでいるかどうか（匿名認証やSNS認証など）
-  	function isAnyAuthenticated() {
+    function isAnyAuthenticated() {
       return request.auth != null;
     }
 
     // ユーザーIDの検証も含めて認証済みかどうか（認可）
     // 命名は isMe でも良さそう
-  	function isUserAuthenticated(userId) {
-    	return isAnyAuthenticated() && userId == request.auth.uid;
+    function isUserAuthenticated(userId) {
+      return isAnyAuthenticated() && userId == request.auth.uid;
     }
 
     // NOTE: [重要] POST系のリクエストに対しては確りとバリデーションをかける（Firestoreのエミュレータを用いてテスト実行環境も整備できるとなお良い）
@@ -18,29 +18,40 @@ service cloud.firestore {
       // nameが存在する場合は、文字列且つ30文字以内
       // nameが存在しない場合は左辺のみでreturnされる。存在する場合は右辺のチェックが実行される
       // nullの可能性がある項目(フィールド)には以下のようにルールを設定する
-    	return !('name' in data) || (data.name is string && data.name.size() <= 30);
+      return !('name' in data) || (data.name is string && data.name.size() <= 30);
     }
 
-    	// keyはTaskに存在しているもののみ
+    // 命名は checkCreateTaskData も良さそう
+    function isValidCreateTaskData(data) {
+      // keyはTaskに存在しているもののみ
       // titleは100文字以内
       // typeはFEATURE/CHORE/BUGの3種類のみ（正規表現）
       // などなど
       // こんなの → document.status.matches("^(TODO|IN_PROGRESS|DONE)$")
-    	return data;
+      // request.resource.data.createdAt == request.time // serverTimestamp()を使っている場合（作成時刻とリクエストした時刻が一致するか）
+      return data;
     }
 
-  	match /users/{userId} {
-    	allow read: if isUserAuthenticated(userId);
+    // 命名は checkUpdateTaskData も良さそう
+    function isValidUpdateTaskData(data) {
+      return data;
+    }
+
+    match /users/{userId} {
+      allow read: if isUserAuthenticated(userId);
       allow create: if isUserAuthenticated(userId) && isValidCreateUserData(request.resource.data)
     }
 
-		// match /tasks/{taskId} {
-    // 	allow read: if request.auth.uid == task;
-    // }
+    match /tasks/{taskId} {
+      // 認証されていて且つ自分のuserIdを持つタスクであれば読み取り可
+      allow read: if isUserAuthenticated(request.resource.data.userId);
+      allow create: if isUserAuthenticated(request.resource.data.userId);
+      allow update: if isUserAuthenticated(request.resource.data.userId);
+    }
 
     // 全てのデータの読み書きを許可する
-		match /{document=**} {
-    	allow read, write: if true;
-    }
+    // match /{document=**} {
+    // 	allow read, write: if true;
+    // }
   }
 }
