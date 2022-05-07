@@ -15,21 +15,33 @@ service cloud.firestore {
     // NOTE: [重要] POST系のリクエストに対しては確りとバリデーションをかける（Firestoreのエミュレータを用いてテスト実行環境も整備できるとなお良い）
     // 命名は checkCreateUserData も良さそう
     function isValidCreateUserData(data) {
+      // 追加できるフィールドは User型 で定義してあるもののみ（参考：https://zenn.dev/k2wanko/articles/3007acaafce03db58989）
       // nameが存在する場合は、文字列且つ30文字以内
       // nameが存在しない場合は左辺のみでreturnされる。存在する場合は右辺のチェックが実行される
       // nullの可能性がある項目(フィールド)には以下のようにルールを設定する
-      return !('name' in data) || (data.name is string && data.name.size() <= 30);
+      return data.keys().hasOnly(['name', 'createdAt'])
+        && !('name' in data) || (data.name is string && data.name.size() <= 30)
+        // serverTimestamp()を使って作成日時等を登録している場合、作成時刻とリクエストした時刻が一致するかを判定
+        && request.resource.data.createdAt == request.time;
     }
 
     // 命名は checkCreateTaskData も良さそう
     function isValidCreateTaskData(data) {
-      // keyはTaskに存在しているもののみ
-      // titleは100文字以内
-      // typeはFEATURE/CHORE/BUGの3種類のみ（正規表現）
-      // などなど
-      // こんなの → document.status.matches("^(TODO|IN_PROGRESS|DONE)$")
-      // request.resource.data.createdAt == request.time // serverTimestamp()を使っている場合（作成時刻とリクエストした時刻が一致するか）
-      return data;
+      // 追加できるフィールドは Task型 で定義してあるもののみ
+      // title:   必須、文字列、30文字以内
+      // status:  必須、作成時は"BEFORE_START"固定
+      // userId:  必須、リクエストしているユーザーIDと同じ
+      // type:    必須、FEATURE/CHORE/BUGの3種類のみ
+      // dueDate: 任意、日付型
+      // point:   任意、数値、30以内
+      return data.keys().hasOnly(['title', 'status', 'userId', 'type', 'dueDate', 'point', 'createdAt'])
+        && data.title is string && data.title.size() <= 30
+        && data.status is string && data.status.matches("^(BEFORE_START)$")
+        && data.userId is string && data.userId == request.auth.uid
+        && data.type is string && data.type.matches("^(FEATURE|CHORE|BUG)$")
+        && (!('dueDate' in data) || data.dueDate is timestamp)
+        && (!('point' in data) || data.point is number && data.point <= 30)
+        && request.resource.data.createdAt == request.time;
     }
 
     // 命名は checkUpdateTaskData も良さそう
@@ -44,9 +56,8 @@ service cloud.firestore {
 
     match /tasks/{taskId} {
       // 認証されていて且つ自分のuserIdを持つタスクであれば読み取り可
-      allow read: if isUserAuthenticated(request.resource.data.userId);
-      allow create: if isUserAuthenticated(request.resource.data.userId);
-      allow update: if isUserAuthenticated(request.resource.data.userId);
+      allow read: if isUserAuthenticated(request.auth.uid) && resource.data.userId == request.auth.uid;
+      allow create: if isUserAuthenticated(request.auth.uid) && isValidCreateTaskData(request.resource.data);
     }
 
     // 全てのデータの読み書きを許可する
