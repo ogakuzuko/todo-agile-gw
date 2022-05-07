@@ -7,6 +7,8 @@
     "build": "next build",
     "start": "next start",
     "test": "jest --watch",
+    "test:silent": "jest --watch --silent",
+    "test-total-coverage": "jest --collectCoverage=true --coverageReporters=json-summary --silent",
     "lint": "next lint",
     "lint:eslint": "eslint --cache .",
     "lint:prettier": "prettier --check .",
