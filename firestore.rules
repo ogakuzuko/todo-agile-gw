@@ -46,7 +46,21 @@ service cloud.firestore {
 
     // 命名は checkUpdateTaskData も良さそう
     function isValidUpdateTaskData(data) {
-      return data;
+      // 追加できるフィールドは Task型 で定義してあるもののみ
+      // title:   必須、文字列、30文字以内
+      // status:  必須、Task.Status型のみ
+      // userId:  必須、リクエストしているユーザーIDと同じ
+      // type:    必須、FEATURE/CHORE/BUGの3種類のみ
+      // dueDate: 任意、日付型
+      // point:   任意、数値、30以内
+      return data.keys().hasOnly(['title', 'status', 'userId', 'type', 'dueDate', 'point', 'createdAt'])
+        && data.title is string && data.title.size() <= 30
+        && data.status is string && data.status.matches("^(BEFORE_START|STARTED|DEV_FINISHED|VER_DEPLOYED|TEST_OK|TEST_NG|RELEASED)$")
+        && data.userId is string && data.userId == request.auth.uid
+        && data.type is string && data.type.matches("^(FEATURE|CHORE|BUG)$")
+        && (!('dueDate' in data) || data.dueDate is timestamp)
+        && (!('point' in data) || data.point is number && data.point <= 30)
+        && request.resource.data.createdAt == request.time;
     }
 
     match /users/{userId} {
@@ -55,9 +69,9 @@ service cloud.firestore {
     }
 
     match /tasks/{taskId} {
-      // 認証されていて且つ自分のuserIdを持つタスクであれば読み取り可
       allow read: if isUserAuthenticated(request.auth.uid) && resource.data.userId == request.auth.uid;
       allow create: if isUserAuthenticated(request.auth.uid) && isValidCreateTaskData(request.resource.data);
+      allow update: if isUserAuthenticated(request.auth.uid) && isValidUpdateTaskData(request.resource.data);
     }
 
     // 全てのデータの読み書きを許可する
