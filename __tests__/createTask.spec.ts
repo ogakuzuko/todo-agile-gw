@@ -1,4 +1,5 @@
 import {
+  INVALID_DUE_DATE_DATA,
   INVALID_STATUS_DATA,
   INVALID_TITLE_DATA,
   INVALID_TYPE_DATA,
@@ -75,6 +76,14 @@ describe('typeが不正', () => {
   it('typeがTaskType型以外', () => {
     expect(() => createTask(...INVALID_TYPE_DATA[1].params)).toThrowError(
       INVALID_TYPE_DATA[1].expected,
+    )
+  })
+})
+
+describe('dueDateが不正', () => {
+  it('dueDateがDate型以外', () => {
+    expect(() => createTask(...INVALID_DUE_DATE_DATA[0].params)).toThrowError(
+      INVALID_DUE_DATE_DATA[0].expected,
     )
   })
 })

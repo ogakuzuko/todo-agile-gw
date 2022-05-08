@@ -173,3 +173,19 @@ export const INVALID_TYPE_DATA: InvalidTestData[] = [
     expected: '課題のタイプは"FEATURE", "CHORE", "BUG"のうちのいずれかである必要があります',
   },
 ]
+
+// dueDateが不正な場合のテストデータ
+export const INVALID_DUE_DATE_DATA: InvalidTestData[] = [
+  {
+    params: [
+      {
+        title: 'テストタスク',
+        status: 'BEFORE_START',
+        userId: 'TEST_USER',
+        type: 'FEATURE',
+        dueDate: 'hoge',
+      },
+    ],
+    expected: 'dueDateの値はDate型である必要があります',
+  },
+]

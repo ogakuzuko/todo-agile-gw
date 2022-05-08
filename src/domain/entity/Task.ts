@@ -55,12 +55,11 @@ export const createTask = (task: NewTask): NewTask => {
     throw new Error('課題のタイプは"FEATURE", "CHORE", "BUG"のうちのいずれかである必要があります')
   }
 
-  // dueDateが存在する場合、Date型?Dayjs型以外であればエラー
-  // TODO: ここの検証方法要検討
-  // if (task.dueDate && typeof task.dueDate !== 'object') {
-  //   console.error('')
-  //   throw new Error('')
-  // }
+  // dueDateが存在する場合、Date型以外であればエラー
+  if (task.dueDate && !(task.dueDate instanceof Date)) {
+    console.error('dueDateの値はDate型である必要があります')
+    throw new Error('dueDateの値はDate型である必要があります')
+  }
 
   // pointが存在する場合、数値以外であればエラー
   if (task.point && typeof task.point !== 'number') {
@@ -239,12 +238,11 @@ export const updateTask = (updatingTask: Task, originalTaskStatus: Status): Task
     throw new Error('課題のタイプは"FEATURE", "CHORE", "BUG"のうちのいずれかである必要があります')
   }
 
-  // dueDateが存在する場合、Date型?Dayjs型以外であればエラー
-  // TODO: ここの検証方法要検討
-  // if (task.dueDate && typeof task.dueDate !== 'object') {
-  //   console.error('')
-  //   throw new Error('')
-  // }
+  // dueDateが存在する場合、Date型以外であればエラー
+  if (updatingTask.dueDate && !(updatingTask.dueDate instanceof Date)) {
+    console.error('dueDateの値はDate型である必要があります')
+    throw new Error('dueDateの値はDate型である必要があります')
+  }
 
   // pointが存在する場合、数値以外であればエラー
   if (updatingTask.point && typeof updatingTask.point !== 'number') {
