@@ -113,7 +113,13 @@ export const updateTask = (updatingTask: Task, originalTaskStatus: Status): Task
     throw new Error('課題の要約は30文字以内である必要があります')
   }
 
-  // statusが"BEFORE_START", "STARTED", "DEV_FINISHED", "VER_DEPLOYED", "TEST_OK", "TEST_NG", "RELEASED"以外の場合はエラー
+  // 更新前status（=originalTaskStatus）が"BEFORE_START", "STARTED", "DEV_FINISHED", "VER_DEPLOYED", "TEST_OK", "TEST_NG", "RELEASED"以外の場合はエラー
+  if (!TASK_STATUS.includes(originalTaskStatus)) {
+    console.error('更新前の課題のステータスが不正です')
+    throw new Error('更新前の課題のステータスが不正です')
+  }
+
+  // 更新後statusが"BEFORE_START", "STARTED", "DEV_FINISHED", "VER_DEPLOYED", "TEST_OK", "TEST_NG", "RELEASED"以外の場合はエラー
   if (!TASK_STATUS.includes(updatingTask.status)) {
     console.error(
       '課題のステータスは"BEFORE_START", "STARTED", "DEV_FINISHED", "VER_DEPLOYED", "TEST_OK", "TEST_NG", "RELEASED"のうちのいずれかである必要があります',
