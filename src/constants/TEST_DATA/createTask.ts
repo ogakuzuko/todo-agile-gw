@@ -50,7 +50,7 @@ export const VALID_DATA: NewTask[] = [
   },
 ]
 
-// 課題の要約(title)が不正な場合のテストデータ
+// titleが不正な場合のテストデータ
 export const INVALID_TITLE_DATA: InvalidTestData[] = [
   // titleが空文字
   {
@@ -87,6 +87,34 @@ export const INVALID_TITLE_DATA: InvalidTestData[] = [
       },
     ],
     expected: '課題の要約は30文字以内である必要があります',
+  },
+]
+
+// statusが不正な場合のテストデータ
+export const INVALID_STATUS_DATA: InvalidTestData[] = [
+  // statusが"BEFORE_START"以外
+  {
+    params: [
+      {
+        title: 'テストタスク',
+        status: 'RELEASED',
+        userId: 'TEST_USER',
+        type: 'FEATURE',
+      },
+    ],
+    expected: '課題のステータスが不正です',
+  },
+  // statusが空文字
+  {
+    params: [
+      {
+        title: 'テストタスク',
+        status: '',
+        userId: 'TEST_USER',
+        type: 'FEATURE',
+      },
+    ],
+    expected: '課題のステータスが不正です',
   },
 ]
 

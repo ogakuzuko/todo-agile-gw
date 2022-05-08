@@ -1,4 +1,5 @@
 import {
+  INVALID_STATUS_DATA,
   INVALID_TITLE_DATA,
   INVALID_USER_ID_DATA,
   VALID_DATA,
@@ -20,20 +21,33 @@ describe('正規データ', () => {
   })
 })
 
-describe('課題の要約(title)が不正', () => {
-  it('要約(title)が存在しない', () => {
+describe('titleが不正', () => {
+  it('titleが存在しない', () => {
     expect(() => createTask(...INVALID_TITLE_DATA[0].params)).toThrowError(
       INVALID_TITLE_DATA[0].expected,
     )
   })
-  it('要約(title)が文字列以外', () => {
+  it('titleが文字列以外', () => {
     expect(() => createTask(...INVALID_TITLE_DATA[1].params)).toThrowError(
       INVALID_TITLE_DATA[1].expected,
     )
   })
-  it('要約(title)が30文字を超えている', () => {
+  it('titleが30文字を超えている', () => {
     expect(() => createTask(...INVALID_TITLE_DATA[2].params)).toThrowError(
       INVALID_TITLE_DATA[2].expected,
+    )
+  })
+})
+
+describe('statusが不正', () => {
+  it('statusが"BEFORE_START"以外', () => {
+    expect(() => createTask(...INVALID_STATUS_DATA[0].params)).toThrowError(
+      INVALID_STATUS_DATA[0].expected,
+    )
+  })
+  it('statusが空文字', () => {
+    expect(() => createTask(...INVALID_STATUS_DATA[1].params)).toThrowError(
+      INVALID_STATUS_DATA[1].expected,
     )
   })
 })
