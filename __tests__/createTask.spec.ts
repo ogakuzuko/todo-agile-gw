@@ -2,8 +2,17 @@ import { INVALID_TITLE_DATA, VALID_DATA } from '@/constants/TEST_DATA/createTask
 import { createTask } from '@/domain/entity/Task'
 
 describe('正規データ', () => {
-  it('正規データ', () => {
+  it('title, type指定（最低限）', () => {
     expect(createTask(VALID_DATA[0])).toEqual(VALID_DATA[0])
+  })
+  it('title、type、dueDate指定', () => {
+    expect(createTask(VALID_DATA[1])).toEqual(VALID_DATA[1])
+  })
+  it('title、type、point指定', () => {
+    expect(createTask(VALID_DATA[2])).toEqual(VALID_DATA[2])
+  })
+  it('title、type、dueDate、point指定', () => {
+    expect(createTask(VALID_DATA[3])).toEqual(VALID_DATA[3])
   })
 })
 

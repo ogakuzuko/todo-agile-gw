@@ -1,4 +1,6 @@
 // createTask()のテスト用データ
+import dayjs from 'dayjs'
+
 import type { createTask } from '@/domain/entity/Task'
 import type { NewTask } from '@/types/task'
 
@@ -14,12 +16,37 @@ type InvalidTestData = {
 
 // タスクの登録として有効なデータ
 export const VALID_DATA: NewTask[] = [
-  // 一番最低限のデータ
+  // title、type指定（一番最低限のデータ）
   {
     title: 'テストタスク',
     status: 'BEFORE_START',
     userId: 'TEST_USER',
     type: 'FEATURE',
+  },
+  // title、type、dueDate指定
+  {
+    title: 'テストタスク',
+    status: 'BEFORE_START',
+    userId: 'TEST_USER',
+    type: 'FEATURE',
+    dueDate: dayjs().toDate(),
+  },
+  // title、type、point指定
+  {
+    title: 'テストタスク',
+    status: 'BEFORE_START',
+    userId: 'TEST_USER',
+    type: 'FEATURE',
+    point: 5,
+  },
+  // title、type、dueDate、point指定
+  {
+    title: 'テストタスク',
+    status: 'BEFORE_START',
+    userId: 'TEST_USER',
+    type: 'FEATURE',
+    dueDate: dayjs().toDate(),
+    point: 10,
   },
 ]
 
