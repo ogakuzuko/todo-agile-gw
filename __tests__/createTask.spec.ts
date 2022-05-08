@@ -25,6 +25,11 @@ describe('正規データ', () => {
 })
 
 describe('titleが不正', () => {
+  // NOTE: 例外のテストについて
+  // toThrowError(=toThrowも同じ)は、引数に指定した文字列がエラーメッセージに含まれているかをテストする。あくまで部分一致なので、完全一致にする場合は正規表現を用いて以下のようにする
+  // 部分一致： expect().toThrowError(/エラーメッセージ/); or expect().toThrowError('エラーメッセージ');
+  // 完全一致: expect().toThrowError(/^エラーメッセージ$/); or expect().toThrowError(new Error('エラーメッセージ');
+  // 参考：https://jestjs.io/ja/docs/expect#tothrowerror
   it('titleが存在しない', () => {
     expect(() => createTask(...INVALID_TITLE_DATA[0].params)).toThrowError(
       INVALID_TITLE_DATA[0].expected,
