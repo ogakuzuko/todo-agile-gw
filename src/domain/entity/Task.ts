@@ -1,5 +1,6 @@
 // 目標は、このファイルを見ればTaskのドメインルールが全てわかること
 // Firestoreへの保存処理はここでは絡んでこないので単体テストが書きやすい
+import { TASK_STATUS, TASK_TYPE } from '@/constants/task'
 import type { NewTask, Status, Task } from '@/types/task'
 
 export const createTask = (task: NewTask): NewTask => {
@@ -48,6 +49,12 @@ export const createTask = (task: NewTask): NewTask => {
     throw new Error('課題のタイプが選択されていません')
   }
 
+  // typeが"FEATURE", "CHORE", "BUG"以外の場合はエラー
+  if (!TASK_TYPE.includes(task.type)) {
+    console.error('課題のタイプは"FEATURE", "CHORE", "BUG"のうちのいずれかである必要があります')
+    throw new Error('課題のタイプは"FEATURE", "CHORE", "BUG"のうちのいずれかである必要があります')
+  }
+
   // dueDateが存在する場合、Date型?Dayjs型以外であればエラー
   // TODO: ここの検証方法要検討
   // if (task.dueDate && typeof task.dueDate !== 'object') {
@@ -73,12 +80,21 @@ export const createTask = (task: NewTask): NewTask => {
     throw new Error('課題のタイプが"Chore"か"Bug"の場合、dueDateやpointを指定することはできません')
   }
 
+  // チェック用
+  console.log('バリデーションOK！', task)
+
   return task
 }
 
 // NOTE: 引数：タスクの更新内容（現在のタスクStatus）と、更新後のstatus（押したボタンで判定（ex. テストOKを押したら、更新後のstatusは'TEST_OK'なので、引数として'TEST_OK'が渡される））
 export const updateTask = (updatingTask: Task, originalTaskStatus: Status): Task => {
   // Write(書き込み)用のドメインバリデーション
+
+  // idが存在しない場合はエラー
+  if (!updatingTask.id) {
+    console.error('IDが存在しません')
+    throw new Error('IDが存在しません')
+  }
 
   // titleが存在しない場合はエラー
   if (!updatingTask.title) {
@@ -96,6 +112,16 @@ export const updateTask = (updatingTask: Task, originalTaskStatus: Status): Task
   if (updatingTask.title.length > 30) {
     console.error('課題の要約は30文字以内である必要があります')
     throw new Error('課題の要約は30文字以内である必要があります')
+  }
+
+  // statusが"BEFORE_START", "STARTED", "DEV_FINISHED", "VER_DEPLOYED", "TEST_OK", "TEST_NG", "RELEASED"以外の場合はエラー
+  if (!TASK_STATUS.includes(updatingTask.status)) {
+    console.error(
+      '課題のステータスは"BEFORE_START", "STARTED", "DEV_FINISHED", "VER_DEPLOYED", "TEST_OK", "TEST_NG", "RELEASED"のうちのいずれかである必要があります',
+    )
+    throw new Error(
+      '課題のステータスは"BEFORE_START", "STARTED", "DEV_FINISHED", "VER_DEPLOYED", "TEST_OK", "TEST_NG", "RELEASED"のうちのいずれかである必要があります',
+    )
   }
 
   // 変更前のステータス：「開始前」
@@ -205,6 +231,12 @@ export const updateTask = (updatingTask: Task, originalTaskStatus: Status): Task
   if (!updatingTask.type) {
     console.error('課題のタイプが選択されていません')
     throw new Error('課題のタイプが選択されていません')
+  }
+
+  // typeが"FEATURE", "CHORE", "BUG"以外の場合はエラー
+  if (!TASK_TYPE.includes(updatingTask.type)) {
+    console.error('課題のタイプは"FEATURE", "CHORE", "BUG"のうちのいずれかである必要があります')
+    throw new Error('課題のタイプは"FEATURE", "CHORE", "BUG"のうちのいずれかである必要があります')
   }
 
   // dueDateが存在する場合、Date型?Dayjs型以外であればエラー
