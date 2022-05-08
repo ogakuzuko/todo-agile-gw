@@ -1,4 +1,4 @@
-import { VALID_DATA } from '@/constants/TEST_DATA/updateTask'
+import { INVALID_TITLE_DATA, VALID_DATA } from '@/constants/TEST_DATA/updateTask'
 import { updateTask } from '@/domain/entity/Task'
 
 describe('正規データ', () => {
@@ -66,5 +66,23 @@ describe('正規データ', () => {
   it('status更新（リリース済み → リリース済み）', () => {
     const result = updateTask(...VALID_DATA[15].params)
     expect(result.status).toEqual(VALID_DATA[15].expected)
+  })
+})
+
+describe('titleが不正', () => {
+  it('titleが存在しない', () => {
+    expect(() => updateTask(...INVALID_TITLE_DATA[0].params)).toThrowError(
+      INVALID_TITLE_DATA[0].expected,
+    )
+  })
+  it('titleが文字列以外', () => {
+    expect(() => updateTask(...INVALID_TITLE_DATA[1].params)).toThrowError(
+      INVALID_TITLE_DATA[1].expected,
+    )
+  })
+  it('titleが30文字を超えている', () => {
+    expect(() => updateTask(...INVALID_TITLE_DATA[2].params)).toThrowError(
+      INVALID_TITLE_DATA[2].expected,
+    )
   })
 })

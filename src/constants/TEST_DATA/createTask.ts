@@ -20,14 +20,14 @@ export const VALID_DATA: NewTask[] = [
   {
     title: 'テストタスク',
     status: 'BEFORE_START',
-    userId: 'TEST_USER',
+    userId: 'TEST_USER_ID',
     type: 'FEATURE',
   },
   // title、type、dueDate指定
   {
     title: 'テストタスク',
     status: 'BEFORE_START',
-    userId: 'TEST_USER',
+    userId: 'TEST_USER_ID',
     type: 'FEATURE',
     dueDate: dayjs().toDate(),
   },
@@ -35,7 +35,7 @@ export const VALID_DATA: NewTask[] = [
   {
     title: 'テストタスク',
     status: 'BEFORE_START',
-    userId: 'TEST_USER',
+    userId: 'TEST_USER_ID',
     type: 'FEATURE',
     point: 5,
   },
@@ -43,7 +43,7 @@ export const VALID_DATA: NewTask[] = [
   {
     title: 'テストタスク',
     status: 'BEFORE_START',
-    userId: 'TEST_USER',
+    userId: 'TEST_USER_ID',
     type: 'FEATURE',
     dueDate: dayjs().toDate(),
     point: 10,
@@ -58,7 +58,7 @@ export const INVALID_TITLE_DATA: InvalidTestData[] = [
       {
         title: '',
         status: 'BEFORE_START',
-        userId: 'TEST_USER',
+        userId: 'TEST_USER_ID',
         type: 'FEATURE',
       },
     ],
@@ -70,7 +70,7 @@ export const INVALID_TITLE_DATA: InvalidTestData[] = [
       {
         title: 123,
         status: 'BEFORE_START',
-        userId: 'TEST_USER',
+        userId: 'TEST_USER_ID',
         type: 'FEATURE',
       },
     ],
@@ -82,7 +82,7 @@ export const INVALID_TITLE_DATA: InvalidTestData[] = [
       {
         title: 'あああああいいいいいうううううえええええおおおおおかかかかかききききき',
         status: 'BEFORE_START',
-        userId: 'TEST_USER',
+        userId: 'TEST_USER_ID',
         type: 'FEATURE',
       },
     ],
@@ -98,7 +98,7 @@ export const INVALID_STATUS_DATA: InvalidTestData[] = [
       {
         title: 'テストタスク',
         status: 'RELEASED',
-        userId: 'TEST_USER',
+        userId: 'TEST_USER_ID',
         type: 'FEATURE',
       },
     ],
@@ -110,7 +110,7 @@ export const INVALID_STATUS_DATA: InvalidTestData[] = [
       {
         title: 'テストタスク',
         status: '',
-        userId: 'TEST_USER',
+        userId: 'TEST_USER_ID',
         type: 'FEATURE',
       },
     ],
@@ -154,7 +154,7 @@ export const INVALID_TYPE_DATA: InvalidTestData[] = [
       {
         title: 'テストタスク',
         status: 'BEFORE_START',
-        userId: 'TEST_USER',
+        userId: 'TEST_USER_ID',
         type: '',
       },
     ],
@@ -166,7 +166,7 @@ export const INVALID_TYPE_DATA: InvalidTestData[] = [
       {
         title: 'テストタスク',
         status: 'BEFORE_START',
-        userId: 'TEST_USER',
+        userId: 'TEST_USER_ID',
         type: 'HOGE',
       },
     ],
@@ -182,7 +182,7 @@ export const INVALID_DUE_DATE_DATA: InvalidTestData[] = [
       {
         title: 'テストタスク',
         status: 'BEFORE_START',
-        userId: 'TEST_USER',
+        userId: 'TEST_USER_ID',
         type: 'FEATURE',
         dueDate: 'hoge',
       },
@@ -195,7 +195,7 @@ export const INVALID_DUE_DATE_DATA: InvalidTestData[] = [
       {
         title: 'テストタスク',
         status: 'BEFORE_START',
-        userId: 'TEST_USER',
+        userId: 'TEST_USER_ID',
         type: 'CHORE',
         dueDate: dayjs().toDate(),
       },
@@ -212,7 +212,7 @@ export const INVALID_POINT_DATA: InvalidTestData[] = [
       {
         title: 'テストタスク',
         status: 'BEFORE_START',
-        userId: 'TEST_USER',
+        userId: 'TEST_USER_ID',
         type: 'FEATURE',
         point: 'hoge',
       },
@@ -225,7 +225,7 @@ export const INVALID_POINT_DATA: InvalidTestData[] = [
       {
         title: 'テストタスク',
         status: 'BEFORE_START',
-        userId: 'TEST_USER',
+        userId: 'TEST_USER_ID',
         type: 'FEATURE',
         point: 100,
       },
@@ -238,7 +238,7 @@ export const INVALID_POINT_DATA: InvalidTestData[] = [
       {
         title: 'テストタスク',
         status: 'BEFORE_START',
-        userId: 'TEST_USER',
+        userId: 'TEST_USER_ID',
         type: 'CHORE',
         point: 5,
       },

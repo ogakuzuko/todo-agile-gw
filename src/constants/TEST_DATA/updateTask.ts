@@ -18,10 +18,10 @@ export const VALID_DATA: ValidStatusTestData[] = [
   {
     params: [
       {
-        id: 'TEST_TASK',
+        id: 'TEST_TASK_ID',
         title: 'テストタスク',
         status: 'BEFORE_START',
-        userId: 'TEST_USER',
+        userId: 'TEST_USER_ID',
         type: 'FEATURE',
       },
       'BEFORE_START',
@@ -32,10 +32,10 @@ export const VALID_DATA: ValidStatusTestData[] = [
   {
     params: [
       {
-        id: 'TEST_TASK',
+        id: 'TEST_TASK_ID',
         title: 'テストタスク',
         status: 'STARTED',
-        userId: 'TEST_USER',
+        userId: 'TEST_USER_ID',
         type: 'FEATURE',
       },
       'BEFORE_START',
@@ -46,10 +46,10 @@ export const VALID_DATA: ValidStatusTestData[] = [
   {
     params: [
       {
-        id: 'TEST_TASK',
+        id: 'TEST_TASK_ID',
         title: 'テストタスク',
         status: 'STARTED',
-        userId: 'TEST_USER',
+        userId: 'TEST_USER_ID',
         type: 'FEATURE',
       },
       'STARTED',
@@ -60,10 +60,10 @@ export const VALID_DATA: ValidStatusTestData[] = [
   {
     params: [
       {
-        id: 'TEST_TASK',
+        id: 'TEST_TASK_ID',
         title: 'テストタスク',
         status: 'DEV_FINISHED',
-        userId: 'TEST_USER',
+        userId: 'TEST_USER_ID',
         type: 'FEATURE',
       },
       'STARTED',
@@ -74,10 +74,10 @@ export const VALID_DATA: ValidStatusTestData[] = [
   {
     params: [
       {
-        id: 'TEST_TASK',
+        id: 'TEST_TASK_ID',
         title: 'テストタスク',
         status: 'DEV_FINISHED',
-        userId: 'TEST_USER',
+        userId: 'TEST_USER_ID',
         type: 'FEATURE',
       },
       'DEV_FINISHED',
@@ -88,10 +88,10 @@ export const VALID_DATA: ValidStatusTestData[] = [
   {
     params: [
       {
-        id: 'TEST_TASK',
+        id: 'TEST_TASK_ID',
         title: 'テストタスク',
         status: 'VER_DEPLOYED',
-        userId: 'TEST_USER',
+        userId: 'TEST_USER_ID',
         type: 'FEATURE',
       },
       'DEV_FINISHED',
@@ -102,10 +102,10 @@ export const VALID_DATA: ValidStatusTestData[] = [
   {
     params: [
       {
-        id: 'TEST_TASK',
+        id: 'TEST_TASK_ID',
         title: 'テストタスク',
         status: 'STARTED',
-        userId: 'TEST_USER',
+        userId: 'TEST_USER_ID',
         type: 'FEATURE',
       },
       'DEV_FINISHED',
@@ -116,10 +116,10 @@ export const VALID_DATA: ValidStatusTestData[] = [
   {
     params: [
       {
-        id: 'TEST_TASK',
+        id: 'TEST_TASK_ID',
         title: 'テストタスク',
         status: 'VER_DEPLOYED',
-        userId: 'TEST_USER',
+        userId: 'TEST_USER_ID',
         type: 'FEATURE',
       },
       'VER_DEPLOYED',
@@ -130,10 +130,10 @@ export const VALID_DATA: ValidStatusTestData[] = [
   {
     params: [
       {
-        id: 'TEST_TASK',
+        id: 'TEST_TASK_ID',
         title: 'テストタスク',
         status: 'TEST_OK',
-        userId: 'TEST_USER',
+        userId: 'TEST_USER_ID',
         type: 'FEATURE',
       },
       'VER_DEPLOYED',
@@ -144,10 +144,10 @@ export const VALID_DATA: ValidStatusTestData[] = [
   {
     params: [
       {
-        id: 'TEST_TASK',
+        id: 'TEST_TASK_ID',
         title: 'テストタスク',
         status: 'TEST_NG',
-        userId: 'TEST_USER',
+        userId: 'TEST_USER_ID',
         type: 'FEATURE',
       },
       'VER_DEPLOYED',
@@ -158,10 +158,10 @@ export const VALID_DATA: ValidStatusTestData[] = [
   {
     params: [
       {
-        id: 'TEST_TASK',
+        id: 'TEST_TASK_ID',
         title: 'テストタスク',
         status: 'TEST_OK',
-        userId: 'TEST_USER',
+        userId: 'TEST_USER_ID',
         type: 'FEATURE',
       },
       'TEST_OK',
@@ -172,10 +172,10 @@ export const VALID_DATA: ValidStatusTestData[] = [
   {
     params: [
       {
-        id: 'TEST_TASK',
+        id: 'TEST_TASK_ID',
         title: 'テストタスク',
         status: 'RELEASED',
-        userId: 'TEST_USER',
+        userId: 'TEST_USER_ID',
         type: 'FEATURE',
       },
       'TEST_OK',
@@ -186,10 +186,10 @@ export const VALID_DATA: ValidStatusTestData[] = [
   {
     params: [
       {
-        id: 'TEST_TASK',
+        id: 'TEST_TASK_ID',
         title: 'テストタスク',
         status: 'TEST_NG',
-        userId: 'TEST_USER',
+        userId: 'TEST_USER_ID',
         type: 'FEATURE',
       },
       'TEST_NG',
@@ -200,10 +200,10 @@ export const VALID_DATA: ValidStatusTestData[] = [
   {
     params: [
       {
-        id: 'TEST_TASK',
+        id: 'TEST_TASK_ID',
         title: 'テストタスク',
         status: 'STARTED',
-        userId: 'TEST_USER',
+        userId: 'TEST_USER_ID',
         type: 'FEATURE',
       },
       'TEST_NG',
@@ -214,10 +214,10 @@ export const VALID_DATA: ValidStatusTestData[] = [
   {
     params: [
       {
-        id: 'TEST_TASK',
+        id: 'TEST_TASK_ID',
         title: 'テストタスク',
         status: 'VER_DEPLOYED',
-        userId: 'TEST_USER',
+        userId: 'TEST_USER_ID',
         type: 'FEATURE',
       },
       'TEST_NG',
@@ -228,10 +228,10 @@ export const VALID_DATA: ValidStatusTestData[] = [
   {
     params: [
       {
-        id: 'TEST_TASK',
+        id: 'TEST_TASK_ID',
         title: 'テストタスク',
         status: 'RELEASED',
-        userId: 'TEST_USER',
+        userId: 'TEST_USER_ID',
         type: 'FEATURE',
       },
       'RELEASED',
@@ -240,18 +240,48 @@ export const VALID_DATA: ValidStatusTestData[] = [
   },
 ]
 
-export const INVALID_DATA: InvalidTestData[] = [
+// titleが不正な場合のテストデータ
+export const INVALID_TITLE_DATA: InvalidTestData[] = [
+  // titleが空文字
   {
     params: [
       {
-        id: 'TEST_TASK',
-        title: 'テストタスク',
+        id: 'TEST_TASK_ID',
+        title: '',
+        status: 'BEFORE_START',
+        userId: 'TEST_USER_ID',
+        type: 'FEATURE',
+      },
+      'BEFORE_START',
+    ],
+    expected: '課題の要約は必須です',
+  },
+  // titleが文字列以外
+  {
+    params: [
+      {
+        id: 'TEST_TASK_ID',
+        title: 123,
+        status: 'BEFORE_START',
+        userId: 'TEST_USER_ID',
+        type: 'FEATURE',
+      },
+      'BEFORE_START',
+    ],
+    expected: '課題の要約は文字列である必要があります',
+  },
+  // titleが30文字を超えている
+  {
+    params: [
+      {
+        id: 'TEST_TASK_ID',
+        title: 'あああああいいいいいうううううえええええおおおおおかかかかかききききき',
         status: 'BEFORE_START',
         userId: 'TEST_USER',
         type: 'FEATURE',
       },
       'BEFORE_START',
     ],
-    expected: 'エラーメッセージ',
+    expected: '課題の要約は30文字以内である必要があります',
   },
 ]
