@@ -321,6 +321,153 @@ export const INVALID_USER_ID_DATA: InvalidTestData[] = [
   },
 ]
 
+// statusが不正な場合のテストデータ
+export const INVALID_STATUS_DATA: InvalidTestData[] = [
+  // 更新前status未指定（第2引数originalTaskStatusがundefined）
+  {
+    params: [
+      {
+        id: 'TEST_TASK_ID',
+        title: 'テストタスク',
+        status: 'BEFORE_START',
+        userId: 'TEST_USER_ID',
+        type: 'FEATURE',
+      },
+    ],
+    expected: '更新前の課題のステータスが不正です',
+  },
+  // 更新前statusがTask.Status型以外
+  {
+    params: [
+      {
+        id: 'TEST_TASK_ID',
+        title: 'テストタスク',
+        status: 'BEFORE_START',
+        userId: 'TEST_USER_ID',
+        type: 'FEATURE',
+      },
+      'HOGE',
+    ],
+    expected: '更新前の課題のステータスが不正です',
+  },
+  // 更新後statusがTask.Status型以外
+  {
+    params: [
+      {
+        id: 'TEST_TASK_ID',
+        title: 'テストタスク',
+        status: 'HOGE',
+        userId: 'TEST_USER_ID',
+        type: 'FEATURE',
+      },
+      'BEFORE_START',
+    ],
+    expected:
+      '課題のステータスは"BEFORE_START", "STARTED", "DEV_FINISHED", "VER_DEPLOYED", "TEST_OK", "TEST_NG", "RELEASED"のうちのいずれかである必要があります',
+  },
+  // 開始前 → 開始前/開始 以外
+  {
+    params: [
+      {
+        id: 'TEST_TASK_ID',
+        title: 'テストタスク',
+        status: 'RELEASED',
+        userId: 'TEST_USER_ID',
+        type: 'FEATURE',
+      },
+      'BEFORE_START',
+    ],
+    expected: '課題のステータスが不正です（開始前 → 開始（または変更しない））',
+  },
+  // 開始 → 開始/開発終了 以外
+  {
+    params: [
+      {
+        id: 'TEST_TASK_ID',
+        title: 'テストタスク',
+        status: 'RELEASED',
+        userId: 'TEST_USER_ID',
+        type: 'FEATURE',
+      },
+      'STARTED',
+    ],
+    expected: '課題のステータスが不正です（開始 → 開発終了（または変更しない））',
+  },
+  // 開発終了 → 開発終了/検証環境デプロイ/開始 以外
+  {
+    params: [
+      {
+        id: 'TEST_TASK_ID',
+        title: 'テストタスク',
+        status: 'RELEASED',
+        userId: 'TEST_USER_ID',
+        type: 'FEATURE',
+      },
+      'DEV_FINISHED',
+    ],
+    expected:
+      '課題のステータスが不正です（開発終了 → 検証環境デプロイ | 開始（または変更しない））',
+  },
+  // 検証環境デプロイ → 検証環境デプロイ/テストOK/テストNG 以外
+  {
+    params: [
+      {
+        id: 'TEST_TASK_ID',
+        title: 'テストタスク',
+        status: 'RELEASED',
+        userId: 'TEST_USER_ID',
+        type: 'FEATURE',
+      },
+      'VER_DEPLOYED',
+    ],
+    expected:
+      '課題のステータスが不正です（検証環境デプロイ → テストOK | テストNG（または変更しない））',
+  },
+  // テストOK → テストOK/リリース済み 以外
+  {
+    params: [
+      {
+        id: 'TEST_TASK_ID',
+        title: 'テストタスク',
+        status: 'BEFORE_START',
+        userId: 'TEST_USER_ID',
+        type: 'FEATURE',
+      },
+      'TEST_OK',
+    ],
+    expected: '課題のステータスが不正です（テストOK → リリース済み（または変更しない））',
+  },
+  // テストNG → テストNG/開始/検証環境デプロイ 以外
+  {
+    params: [
+      {
+        id: 'TEST_TASK_ID',
+        title: 'テストタスク',
+        status: 'RELEASED',
+        userId: 'TEST_USER_ID',
+        type: 'FEATURE',
+      },
+      'TEST_NG',
+    ],
+    expected:
+      '課題のステータスが不正です（テストNG → 開始 | 検証環境デプロイ（または変更しない））',
+  },
+  // リリース済み → リリース済み 以外
+  {
+    params: [
+      {
+        id: 'TEST_TASK_ID',
+        title: 'テストタスク',
+        status: 'BEFORE_START',
+        userId: 'TEST_USER_ID',
+        type: 'FEATURE',
+      },
+      'RELEASED',
+    ],
+    expected: '課題のステータスが不正です（リリース済み → 遷移不能）',
+  },
+]
+
 // typeが不正な場合のテストデータ
 export const INVALID_TYPE_DATA: InvalidTestData[] = [
   // typeが存在しない
