@@ -176,6 +176,7 @@ export const INVALID_TYPE_DATA: InvalidTestData[] = [
 
 // dueDateが不正な場合のテストデータ
 export const INVALID_DUE_DATE_DATA: InvalidTestData[] = [
+  // dueDateがDate型以外
   {
     params: [
       {
@@ -187,5 +188,61 @@ export const INVALID_DUE_DATE_DATA: InvalidTestData[] = [
       },
     ],
     expected: 'dueDateの値はDate型である必要があります',
+  },
+  // typeが"FEATURE"以外の場合で、dueDateが指定されている
+  {
+    params: [
+      {
+        title: 'テストタスク',
+        status: 'BEFORE_START',
+        userId: 'TEST_USER',
+        type: 'CHORE',
+        dueDate: dayjs().toDate(),
+      },
+    ],
+    expected: '課題のタイプが"Chore"か"Bug"の場合、dueDateやpointを指定することはできません',
+  },
+]
+
+// pointが不正な場合のテストデータ
+export const INVALID_POINT_DATA: InvalidTestData[] = [
+  // pointが数値以外
+  {
+    params: [
+      {
+        title: 'テストタスク',
+        status: 'BEFORE_START',
+        userId: 'TEST_USER',
+        type: 'FEATURE',
+        point: 'hoge',
+      },
+    ],
+    expected: '課題のポイントは数値である必要があります',
+  },
+  // pointが30を超えている
+  {
+    params: [
+      {
+        title: 'テストタスク',
+        status: 'BEFORE_START',
+        userId: 'TEST_USER',
+        type: 'FEATURE',
+        point: 100,
+      },
+    ],
+    expected: '課題のポイントは30以下である必要があります',
+  },
+  // typeが"FEATURE"以外の場合で、pointが指定されている
+  {
+    params: [
+      {
+        title: 'テストタスク',
+        status: 'BEFORE_START',
+        userId: 'TEST_USER',
+        type: 'CHORE',
+        point: 5,
+      },
+    ],
+    expected: '課題のタイプが"Chore"か"Bug"の場合、dueDateやpointを指定することはできません',
   },
 ]

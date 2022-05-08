@@ -1,5 +1,6 @@
 import {
   INVALID_DUE_DATE_DATA,
+  INVALID_POINT_DATA,
   INVALID_STATUS_DATA,
   INVALID_TITLE_DATA,
   INVALID_TYPE_DATA,
@@ -84,6 +85,29 @@ describe('dueDateが不正', () => {
   it('dueDateがDate型以外', () => {
     expect(() => createTask(...INVALID_DUE_DATE_DATA[0].params)).toThrowError(
       INVALID_DUE_DATE_DATA[0].expected,
+    )
+  })
+  it('typeが"FEATURE"以外でdueDateが指定されている', () => {
+    expect(() => createTask(...INVALID_DUE_DATE_DATA[1].params)).toThrowError(
+      INVALID_DUE_DATE_DATA[1].expected,
+    )
+  })
+})
+
+describe('pointが不正', () => {
+  it('pointが数値以外', () => {
+    expect(() => createTask(...INVALID_POINT_DATA[0].params)).toThrowError(
+      INVALID_POINT_DATA[0].expected,
+    )
+  })
+  it('pointが30を超えている', () => {
+    expect(() => createTask(...INVALID_POINT_DATA[1].params)).toThrowError(
+      INVALID_POINT_DATA[1].expected,
+    )
+  })
+  it('typeが"FEATURE"以外でpointが指定されている', () => {
+    expect(() => createTask(...INVALID_POINT_DATA[2].params)).toThrowError(
+      INVALID_POINT_DATA[2].expected,
     )
   })
 })
