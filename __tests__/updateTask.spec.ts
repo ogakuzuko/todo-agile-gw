@@ -1,4 +1,8 @@
-import { INVALID_TITLE_DATA, VALID_DATA } from '@/constants/TEST_DATA/updateTask'
+import {
+  INVALID_TITLE_DATA,
+  INVALID_USER_ID_DATA,
+  VALID_DATA,
+} from '@/constants/TEST_DATA/updateTask'
 import { updateTask } from '@/domain/entity/Task'
 
 describe('正規データ', () => {
@@ -83,6 +87,19 @@ describe('titleが不正', () => {
   it('titleが30文字を超えている', () => {
     expect(() => updateTask(...INVALID_TITLE_DATA[2].params)).toThrowError(
       INVALID_TITLE_DATA[2].expected,
+    )
+  })
+})
+
+describe('userIdが不正', () => {
+  it('userIdが存在しない', () => {
+    expect(() => updateTask(...INVALID_USER_ID_DATA[0].params)).toThrowError(
+      INVALID_USER_ID_DATA[0].expected,
+    )
+  })
+  it('userIdが文字列以外', () => {
+    expect(() => updateTask(...INVALID_USER_ID_DATA[1].params)).toThrowError(
+      INVALID_USER_ID_DATA[1].expected,
     )
   })
 })
