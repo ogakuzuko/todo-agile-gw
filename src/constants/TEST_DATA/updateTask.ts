@@ -386,3 +386,52 @@ export const INVALID_DUE_DATE_DATA: InvalidTestData[] = [
     expected: '課題のタイプが"Chore"か"Bug"の場合、dueDateやpointを指定することはできません',
   },
 ]
+
+// pointが不正な場合のテストデータ
+export const INVALID_POINT_DATA: InvalidTestData[] = [
+  // pointが数値以外
+  {
+    params: [
+      {
+        id: 'TEST_TASK_ID',
+        title: 'テストタスク',
+        status: 'BEFORE_START',
+        userId: 'TEST_USER_ID',
+        type: 'FEATURE',
+        point: 'hoge',
+      },
+      'BEFORE_START',
+    ],
+    expected: '課題のポイントは数値である必要があります',
+  },
+  // pointが30を超えている
+  {
+    params: [
+      {
+        id: 'TEST_TASK_ID',
+        title: 'テストタスク',
+        status: 'BEFORE_START',
+        userId: 'TEST_USER_ID',
+        type: 'FEATURE',
+        point: 100,
+      },
+      'BEFORE_START',
+    ],
+    expected: '課題のポイントは30以下である必要があります',
+  },
+  // typeが"FEATURE"以外の場合で、pointが指定されている
+  {
+    params: [
+      {
+        id: 'TEST_TASK_ID',
+        title: 'テストタスク',
+        status: 'BEFORE_START',
+        userId: 'TEST_USER_ID',
+        type: 'CHORE',
+        point: 5,
+      },
+      'BEFORE_START',
+    ],
+    expected: '課題のタイプが"Chore"か"Bug"の場合、dueDateやpointを指定することはできません',
+  },
+]
