@@ -25,7 +25,7 @@ service cloud.firestore {
         && request.resource.data.createdAt == request.time;
     }
 
-    // 命名は checkCreateTaskData も良さそう
+    // 命名は checkCreateTaskData も良さそう（isValidTaskContentとかも良さそう）
     function isValidCreateTaskData(data) {
       // 追加できるフィールドは Task型 で定義してあるもののみ
       // title:   必須、文字列、30文字以内
