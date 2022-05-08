@@ -145,3 +145,31 @@ export const INVALID_USER_ID_DATA: InvalidTestData[] = [
     expected: 'ユーザーIDは文字列である必要があります',
   },
 ]
+
+// typeが不正な場合のテストデータ
+export const INVALID_TYPE_DATA: InvalidTestData[] = [
+  // typeが存在しない
+  {
+    params: [
+      {
+        title: 'テストタスク',
+        status: 'BEFORE_START',
+        userId: 'TEST_USER',
+        type: '',
+      },
+    ],
+    expected: '課題のタイプが選択されていません',
+  },
+  // typeがTaskType型以外
+  {
+    params: [
+      {
+        title: 'テストタスク',
+        status: 'BEFORE_START',
+        userId: 'TEST_USER',
+        type: 'HOGE',
+      },
+    ],
+    expected: '課題のタイプは"FEATURE", "CHORE", "BUG"のうちのいずれかである必要があります',
+  },
+]

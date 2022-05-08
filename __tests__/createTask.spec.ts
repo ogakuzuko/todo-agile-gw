@@ -1,6 +1,7 @@
 import {
   INVALID_STATUS_DATA,
   INVALID_TITLE_DATA,
+  INVALID_TYPE_DATA,
   INVALID_USER_ID_DATA,
   VALID_DATA,
 } from '@/constants/TEST_DATA/createTask'
@@ -61,6 +62,19 @@ describe('userIdが不正', () => {
   it('userIdが文字列以外', () => {
     expect(() => createTask(...INVALID_USER_ID_DATA[1].params)).toThrowError(
       INVALID_USER_ID_DATA[1].expected,
+    )
+  })
+})
+
+describe('typeが不正', () => {
+  it('typeが存在しない', () => {
+    expect(() => createTask(...INVALID_TYPE_DATA[0].params)).toThrowError(
+      INVALID_TYPE_DATA[0].expected,
+    )
+  })
+  it('typeがTaskType型以外', () => {
+    expect(() => createTask(...INVALID_TYPE_DATA[1].params)).toThrowError(
+      INVALID_TYPE_DATA[1].expected,
     )
   })
 })
