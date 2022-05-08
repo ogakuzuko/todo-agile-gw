@@ -1,4 +1,3 @@
-import dayjs from 'dayjs'
 import type {
   DocumentData,
   FirestoreDataConverter,
@@ -32,7 +31,7 @@ export const taskConverter: FirestoreDataConverter<Task> = {
       status: data.status,
       userId: data.userId,
       type: data.type,
-      dueDate: dayjs(data.dueDate?.toDate()),
+      dueDate: data.dueDate,
       point: data.point,
     }
   },

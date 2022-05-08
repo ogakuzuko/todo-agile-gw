@@ -1,5 +1,3 @@
-import type { Dayjs } from 'dayjs'
-
 import type { TASK_STATUS, TASK_TYPE } from '@/constants/task'
 
 export type Status = typeof TASK_STATUS[number]
@@ -12,7 +10,7 @@ export type Task = {
   status: Status
   userId: string
   type: TaskType
-  dueDate?: Dayjs
+  dueDate?: Date
   point?: number
 }
 
