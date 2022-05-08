@@ -89,3 +89,31 @@ export const INVALID_TITLE_DATA: InvalidTestData[] = [
     expected: '課題の要約は30文字以内である必要があります',
   },
 ]
+
+// userIdが不正な場合のテストデータ
+export const INVALID_USER_ID_DATA: InvalidTestData[] = [
+  // userIdが存在しない
+  {
+    params: [
+      {
+        title: 'テストタスク',
+        status: 'BEFORE_START',
+        userId: '',
+        type: 'FEATURE',
+      },
+    ],
+    expected: 'ユーザーIDが存在しません',
+  },
+  // userIdが文字列以外
+  {
+    params: [
+      {
+        title: 'テストタスク',
+        status: 'BEFORE_START',
+        userId: 123,
+        type: 'FEATURE',
+      },
+    ],
+    expected: 'ユーザーIDは文字列である必要があります',
+  },
+]
