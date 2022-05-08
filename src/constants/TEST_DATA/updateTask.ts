@@ -1,4 +1,7 @@
 // updateTask()のテスト用データ
+// QUES: status更新以外はタスク作成とテストケースが殆ど同じだけど、こういう場合はどうするのがよいのか。createとupdateで共通するバリデーション部分はまとめてしまうのがよかったのかも？（=> Taskドメインロジック部分のバリデーションを共通化する必要がある(?)）
+import dayjs from 'dayjs'
+
 import type { updateTask } from '@/domain/entity/Task'
 import type { Status } from '@/types/task'
 
@@ -347,5 +350,39 @@ export const INVALID_TYPE_DATA: InvalidTestData[] = [
       'BEFORE_START',
     ],
     expected: '課題のタイプは"FEATURE", "CHORE", "BUG"のうちのいずれかである必要があります',
+  },
+]
+
+// dueDateが不正な場合のテストデータ
+export const INVALID_DUE_DATE_DATA: InvalidTestData[] = [
+  // dueDateがDate型以外
+  {
+    params: [
+      {
+        id: 'TEST_TASK_ID',
+        title: 'テストタスク',
+        status: 'BEFORE_START',
+        userId: 'TEST_USER_ID',
+        type: 'FEATURE',
+        dueDate: 'hoge',
+      },
+      'BEFORE_START',
+    ],
+    expected: 'dueDateの値はDate型である必要があります',
+  },
+  // typeが"FEATURE"以外の場合で、dueDateが指定されている
+  {
+    params: [
+      {
+        id: 'TEST_TASK_ID',
+        title: 'テストタスク',
+        status: 'BEFORE_START',
+        userId: 'TEST_USER_ID',
+        type: 'CHORE',
+        dueDate: dayjs().toDate(),
+      },
+      'BEFORE_START',
+    ],
+    expected: '課題のタイプが"Chore"か"Bug"の場合、dueDateやpointを指定することはできません',
   },
 ]
