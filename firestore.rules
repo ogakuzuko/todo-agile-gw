@@ -78,5 +78,54 @@ service cloud.firestore {
     // match /{document=**} {
     // 	allow read, write: if true;
     // }
+
+    // Firestore便利関数メモ（参考：https://www.youtube.com/watch?v=fwJVdBUKofI）
+    // Firebaseの匿名以外の認証をしているかどうか
+    // 匿名認証はCookieの削除やAppアンインストールで別ユーザーになりうる
+    function isNonAnonymouslyAutenticated() {
+      return request.auth != null;
+    }
+
+    // function isUserAuthenticated(userId) {
+    //   return userId == request.auth.uid;
+    // }
+
+    // 既にFirestore側にあるデータ
+    function existingData() {
+      return resource.data;
+    }
+
+    // 今リクエストしているデータ（Request Bodyみたいなもの）
+    function incomingData() {
+      return request.resource.data;
+    }
+
+    // fieldNameをvalue分incrementしているかどうか（ちょっとまだよくわからない）
+    function isFieldIncremented(fieldName, value) {
+      return (resource == null && request.resource.data[fieldName] == value)
+        || request.resource.data[fieldName] == resource.data[fieldName];
+    }
+
+    // allowedFieldsにあるfieldに対してのみ書き込みを行なっているか
+    function writingToAllowedFields(allowedFields) {
+      return allowedFields.has(request.resource.data.keys());
+    }
+
+    // rulesを書く中で、パスを繋げるときに便利
+    function documentPath(paths) {
+      return path([['databases', database, 'documents'].join('/'), paths.join()'/'].join('/'));
+    }
+
+    function isValidString(text, min, max) {
+      return text is string && min <= text.size() && text.size() <= max;
+    }
+
+    function isValidNumber(num, min, max) {
+      return num is number && min <= num && num <= max;
+    }
+
+    function isValidInteger(num, min, max) {
+      return num is int && min <= num && num <= max;
+    }
   }
 }
