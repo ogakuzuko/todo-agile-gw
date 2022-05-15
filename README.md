@@ -1,34 +1,20 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 参考になる記事リスト
 
-## Getting Started
+## Firestore
+- [React環境でFirebase SDK v9のFirestoreでのCRUDの操作を学ぶ](https://reffect.co.jp/react/react-crud-firebase-9)
+- [《Zenn》【Firebase】Cloud Firestore クエリ まとめ](https://zenn.dev/tentel/articles/ea7d5c03e68e6d142d98)
 
-First, run the development server:
+## Firestore Security Rules
+- [《Zenn》Firestoreでなぜセキュリティルールが必要か](https://zenn.dev/yucatio/articles/5427eede6c3e34)
+- [《Zenn》Cloud Firestoreのセキュリティルールの設計と書き方](https://zenn.dev/k2wanko/articles/3007acaafce03db58989)
+- [《Qiita》Firestore Security Rules の書き方と守るべき原則](https://qiita.com/KosukeSaigusa/items/18217958c581eac9b245)
+- [《Qiita》firebaseのセキュリティールールを設定してみる](https://qiita.com/kitanote/items/51b1a2168ba2eaf37c7d)
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+## FirestoreDataConverter（withConverter）
+- [Firestore ドキュメントを TypeScript のユーザー定義型オブジェクトに変換する (withConverter)](https://maku.blog/p/bw9kv6g/)
+- [《Zenn》SWRで爆死を避ける。firebase Cloud FirestoreとNext.js。](https://zenn.dev/mast1ff/articles/a71ece42905c74)
+- [Firestore のデータを TypeScript と Security Rules で安全に扱う話](https://www.gixo.jp/blog/15372/)
+- [《Qiita》FirestoreとTypeScriptと私【withConverterについて】](https://qiita.com/Itamaster/items/3496036b7acbb3493bc1)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
-
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
-
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## Firebase その他
+- [Firebaseの存在をフロントエンドから隠蔽するために](https://blog.ojisan.io/fb-nukeru/)
