@@ -113,7 +113,7 @@ service cloud.firestore {
 
     // rulesを書く中で、パスを繋げるときに便利
     function documentPath(paths) {
-      return path([['databases', database, 'documents'].join('/'), paths.join()'/'].join('/'));
+      return path([['databases', database, 'documents'].join('/'), paths.join('/')].join('/'));
     }
 
     function isValidString(text, min, max) {
