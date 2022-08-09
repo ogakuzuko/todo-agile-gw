@@ -1,6 +1,9 @@
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
+    // NOTE: Firestoreのルールのデバッグをしたいときにはdebug()関数が便利
+    // 参考：https://qiita.com/sgr-ksmt/items/594496b17e0998aefed0
+
     // 何らかの認証が済んでいるかどうか（匿名認証やSNS認証など）
     function isAnyAuthenticated() {
       return request.auth != null;
@@ -155,5 +158,17 @@ service cloud.firestore {
     // 指定したパスのドキュメントが存在するかどうかのBool値を取得する
     // 参考：https://yamatooo.blog/entry/2021/03/24/083000
     // allow read: if exists(/databases/$(database)/documents/users/hoge);
+
+    // Firestoreのルールのデバッグをしたいときにはdebug()関数が便利
+    // 参考：https://qiita.com/sgr-ksmt/items/594496b17e0998aefed0
+    // 使い方：allow read: if printResource() && request.auth.uid != null;
+    // 使い方：allow write: if printRequest() && request.auth.uid != null;
+    function printRequest() {
+      return debug(request) || true;
+    }
+
+    function printResource() {
+      return debug(resource) || true;
+    }
   }
 }
