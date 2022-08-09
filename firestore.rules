@@ -127,5 +127,33 @@ service cloud.firestore {
     function isValidInteger(num, min, max) {
       return num is int && min <= num && num <= max;
     }
+
+    // リクエストユーザーのuserIdが、userIds内に含まれているかどうか
+    function isUserInArray(userIds) {
+      return request.auth.uid in userIds;
+    }
+
+    // リクエストしているユーザーデータがバリデーションを通っているかどうか
+    // 参考：https://qiita.com/ryo2132/items/23bd6cba1dab49f6275f
+    // 使い方： allow create: if isValidUserData(request.resource.data);
+    function isValidUserData(user) {
+      return 1 <= user.name.size() && user.name.size() <= 30 // nameは1文字以上30文字以内であること
+        && user.gender.matches('male|female|genderDiverse')  // genderは`male`, `female`, `genderDiverse`の3種類だけが選べる
+        && 0 <= user.age && user.age <= 150                  // ageは0〜150の数値である
+    }
+
+    // 指定したパスのドキュメントを取得する（単一ドキュメントに対するリクエストの場合は10個まで使用可能）
+    // 参考：https://yamatooo.blog/entry/2021/03/24/083000
+    // 以下の例は、usersコレクションに、firebase authのuidをキーにしてデータを保存している時、authのuidをキーにしてuserドキュメントを取得(get)し、その名前が「太郎」であるときreadを許可するルール
+    // allow read: if get(/databases/$(database)/documents/users/${request.auth.uid}).data.name == '太郎';
+
+    // 上の注意点としては以下のように関数化して使おうとしても、「${database}の変数が存在しないよ」と怒られて関数として使えないので、そこだけ注意。
+    // function getUserDoc() {
+    //   return get(/databases/$(database)/documents/users/${request.auth.uid}); // これは使えない
+    // }
+
+    // 指定したパスのドキュメントが存在するかどうかのBool値を取得する
+    // 参考：https://yamatooo.blog/entry/2021/03/24/083000
+    // allow read: if exists(/databases/$(database)/documents/users/hoge);
   }
 }
